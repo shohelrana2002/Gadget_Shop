@@ -1,7 +1,19 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import useGetAuth from "../Hooks/useGetAuth";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
+  const { userLogin } = useGetAuth();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const handleLogin = (data) => {
+    console.log(data);
+  };
   return (
     <div>
       <div className="hero bg-base-200 min-h-screen">
@@ -15,7 +27,7 @@ const Login = () => {
             </p>
           </div>
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
-            <form className="card-body">
+            <form onSubmit={handleSubmit(handleLogin)} className="card-body">
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Email</span>
@@ -24,8 +36,9 @@ const Login = () => {
                   type="email"
                   placeholder="email"
                   className="input input-bordered"
-                  required
+                  {...register("email", { required: true })}
                 />
+                {errors.email && <p>Plz Enter A Corecct Email</p>}
               </div>
               <div className="form-control">
                 <label className="label">
@@ -35,8 +48,9 @@ const Login = () => {
                   type="password"
                   placeholder="password"
                   className="input input-bordered"
-                  required
+                  {...register("password", { required: true })}
                 />
+                {errors.email && <p>Plz Enter A Corecct Password</p>}
                 <label className="label">
                   <a href="#" className="label-text-alt link link-hover">
                     Forgot password?
@@ -44,7 +58,9 @@ const Login = () => {
                 </label>
               </div>
               <div className="form-control mt-6">
-                <button className="btn btn-primary">Login</button>
+                <button type="submit" className="btn btn-primary">
+                  Login
+                </button>
               </div>
             </form>
 

@@ -11,8 +11,9 @@ const Register = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = () => {
-    console.log("hi");
+  const onSubmit = (data) => {
+    createAccount(data.email, data.password);
+    console.log(data);
   };
   return (
     <div>
