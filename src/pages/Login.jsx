@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 
 const Login = () => {
@@ -47,6 +47,7 @@ const Login = () => {
                 <button className="btn btn-primary">Login</button>
               </div>
             </form>
+
             <div className="text-center my-4">
               <p>
                 Yo Are New

@@ -1,7 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import useGetAuth from "../Hooks/useGetAuth";
+import { useForm } from "react-hook-form";
 
 const Register = () => {
+  const { createAccount } = useGetAuth();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = () => {
+    console.log("hi");
+  };
   return (
     <div>
       <div>
@@ -16,7 +28,7 @@ const Register = () => {
               </p>
             </div>
             <div className="card bg-base-100 lg:w-1/2 w-full max-w-sm shrink-0 shadow-2xl">
-              <form className="card-body">
+              <form onSubmit={handleSubmit(onSubmit)} className="card-body">
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Email</span>
@@ -25,8 +37,9 @@ const Register = () => {
                     type="email"
                     placeholder="email"
                     className="input input-bordered"
-                    required
+                    {...register("email", { required: true })}
                   />
+                  {errors.email && <p>Email is Required</p>}
                 </div>
                 <div className="form-control">
                   <label className="label">
@@ -36,8 +49,14 @@ const Register = () => {
                     type="password"
                     placeholder="password"
                     className="input input-bordered"
-                    required
+                    {...register("password", { required: true, minLength: 6 })}
                   />
+                  {errors.password?.type === "required" && (
+                    <p>Password is Required</p>
+                  )}
+                  {errors.password?.type === "minLength" && (
+                    <p>password Must Be six Digit </p>
+                  )}
                 </div>
                 <div className="form-control">
                   <label className="label">
@@ -47,11 +66,40 @@ const Register = () => {
                     type="password"
                     placeholder="password"
                     className="input input-bordered"
-                    required
+                    // {...register("confirmPassword", {
+                    //   required: true,
+                    //   validate: (value) => {
+                    //     if (watch("password") !== value) {
+                    //       return <p>Your Password Don't match</p>;
+                    //     }
+                    //   },
+                    // })}
+
+                    {...register("confirmPassword", {
+                      required: "Confirm Password is required",
+                      validate: (value) =>
+                        watch("password") === value ||
+                        "Your Passwords don't match",
+                    })}
+
+                    // {...register("confirmPassword", {
+                    //   required: "Confirm Password is required",
+                    //   validate: (value) =>
+                    //     watch("password") === value ||
+                    //     "Your Passwords don't match",
+                    // })}
                   />
+                  {errors.confirmPassword && (
+                    <p className="text-red-500">
+                      {errors.confirmPassword.message}
+                    </p>
+                  )}
+                  {/* {errors.confirmPassword && <p>Boot Password Must Be match</p>} */}
                 </div>
                 <div className="form-control mt-6">
-                  <button className="btn btn-primary">Register</button>
+                  <button type="submit" className="btn btn-primary">
+                    Register
+                  </button>
                 </div>
               </form>
               <div className="text-center my-4">
