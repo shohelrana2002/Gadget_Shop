@@ -1,7 +1,10 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
+import useGetAuth from "../Hooks/useGetAuth";
+import UserDropDown from "./Home/UserDropDown";
 
 const Navbar = () => {
+  const { user } = useGetAuth();
   return (
     <div>
       <div className="navbar h-16 fixed z-10 shadow-sm  bg-base-200">
@@ -83,19 +86,25 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
-        <div className="navbar-end">
-          <div className="flex gap-2 items-center">
-            <Link to="/login">
-              <button className=" btn-sm btn btn-outline btn-primary text-white py-1 rounded-md">
-                Sing In
-              </button>
-            </Link>
-            <button className="btn btn-primary btn-sm text-white py-1 rounded-md">
-              Sing Up
-            </button>
+        {user ? (
+          <div className="navbar-end">
+            <UserDropDown></UserDropDown>
           </div>
-        </div>
-      </div>{" "}
+        ) : (
+          <div className="navbar-end">
+            <div className="flex gap-2 items-center">
+              <Link to="/login">
+                <button className=" btn-sm btn btn-outline btn-primary text-white py-1 rounded-md">
+                  Sing In
+                </button>
+              </Link>
+              <button className="btn btn-primary btn-sm text-white py-1 rounded-md">
+                Sing Up
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
