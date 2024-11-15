@@ -1,8 +1,12 @@
 import React from "react";
 import useGetAuth from "../../Hooks/useGetAuth";
 import userPic from "../../../public/user.png";
+import { Link } from "react-router-dom";
 const UserDropDown = () => {
-  const { user } = useGetAuth();
+  const { user, userLogout } = useGetAuth();
+  const handleLogout = () => {
+    userLogout();
+  };
   return (
     <div>
       <div className="dropdown dropdown-end">
@@ -18,10 +22,15 @@ const UserDropDown = () => {
           className="dropdown-content menu bg-base-100 rounded-box z-[1] w-52 p-2 shadow"
         >
           <li>
-            <a>Item 1</a>
+            <Link>Dashboard</Link>
           </li>
           <li>
-            <a>Item 2</a>
+            <button
+              onClick={handleLogout}
+              className="btn btn-outline btn-sm btn-primary"
+            >
+              LogOut
+            </button>
           </li>
         </ul>
       </div>

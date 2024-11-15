@@ -7,7 +7,7 @@ const Navbar = () => {
   const { user } = useGetAuth();
   return (
     <div>
-      <div className="navbar h-16 fixed z-10 shadow-sm  bg-base-200">
+      <div className="navbar h-16 top-0 fixed z-10 shadow-sm opacity-80 bg-base-200">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -98,9 +98,11 @@ const Navbar = () => {
                   Sing In
                 </button>
               </Link>
-              <button className="btn btn-primary btn-sm text-white py-1 rounded-md">
-                Sing Up
-              </button>
+              <Link to={"/register"}>
+                <button className="btn btn-primary btn-sm text-white py-1 rounded-md">
+                  Sing Up
+                </button>
+              </Link>
             </div>
           </div>
         )}

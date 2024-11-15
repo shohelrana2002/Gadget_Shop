@@ -6,9 +6,9 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   signInWithPopup,
+  GoogleAuthProvider,
   signOut,
 } from "firebase/auth";
-import { GoogleAuthProvider } from "firebase/auth/web-extension";
 export const AuthContext = createContext(null);
 
 const auth = getAuth(app);
@@ -22,21 +22,25 @@ const AuthProvider = ({ children }) => {
 
   // create a New Account
   const createAccount = (email, password) => {
+    setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   };
 
   // User Login
   const userLogin = (email, password) => {
+    setLoading(true);
     return signInWithEmailAndPassword(auth, email, password);
   };
 
   // Google login
   const googleLogin = () => {
-    return signInWithPopup(googleProvider, auth);
+    setLoading(true);
+    return signInWithPopup(auth, googleProvider);
   };
 
   // User logOut
   const userLogout = () => {
+    setLoading(true);
     return signOut(auth);
   };
 

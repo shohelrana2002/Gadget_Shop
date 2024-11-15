@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useGetAuth from "../Hooks/useGetAuth";
 import { useForm } from "react-hook-form";
+import GoogleLogin from "../components/Home/Login_Register/GoogleLogin";
 
 const Login = () => {
   const { userLogin } = useGetAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -13,6 +15,8 @@ const Login = () => {
   } = useForm();
   const handleLogin = (data) => {
     console.log(data);
+    userLogin(data.email, data.password);
+    navigate("/");
   };
   return (
     <div>
@@ -63,7 +67,9 @@ const Login = () => {
                 </button>
               </div>
             </form>
-
+            <div>
+              <GoogleLogin></GoogleLogin>
+            </div>
             <div className="text-center my-4">
               <p>
                 Yo Are New

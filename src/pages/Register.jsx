@@ -1,10 +1,12 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useGetAuth from "../Hooks/useGetAuth";
 import { useForm } from "react-hook-form";
+import GoogleLogin from "../components/Home/Login_Register/GoogleLogin";
 
 const Register = () => {
   const { createAccount } = useGetAuth();
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -14,6 +16,7 @@ const Register = () => {
   const onSubmit = (data) => {
     createAccount(data.email, data.password);
     console.log(data);
+    navigate("/");
   };
   return (
     <div>
@@ -21,7 +24,7 @@ const Register = () => {
         <div className="hero bg-base-200 min-h-screen">
           <div className="hero-content flex-col lg:flex-row-reverse">
             <div className="text-center lg:w-1/2 w-full lg:text-left">
-              <h1 className="text-5xl font-bold">Login now!</h1>
+              <h1 className="text-5xl font-bold">Register now!</h1>
               <p className="py-6">
                 Provident cupiditate voluptatem et in. Quaerat fugiat ut
                 assumenda excepturi exercitationem quasi. In deleniti eaque aut
@@ -103,6 +106,9 @@ const Register = () => {
                   </button>
                 </div>
               </form>
+              <div>
+                <GoogleLogin></GoogleLogin>
+              </div>
               <div className="text-center my-4">
                 <p>
                   You Have Already Account?
