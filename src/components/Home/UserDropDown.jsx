@@ -13,7 +13,10 @@ const UserDropDown = () => {
         <div tabIndex={0} role="button">
           <div className="avatar">
             <div className="ring-primary ring-offset-base-100 w-10 rounded-full ring ring-offset-2">
-              <img src={`${user?.photoURL || userPic}`} />
+              <img
+                src={`${user?.photoURL || userPic}`}
+                alt={`${user?.photoURL || userPic}`}
+              />
             </div>
           </div>
         </div>

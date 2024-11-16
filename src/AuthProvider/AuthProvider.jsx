@@ -9,6 +9,7 @@ import {
   GoogleAuthProvider,
   signOut,
 } from "firebase/auth";
+import axios from "axios";
 export const AuthContext = createContext(null);
 
 const auth = getAuth(app);
@@ -47,8 +48,21 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      // console.log(currentUser);
-      setLoading(false);
+      if (currentUser) {
+        axios
+          .post(`http://localhost:3000/authentication`, {
+            email: currentUser.email,
+          })
+          .then((data) => {
+            if (data.data) {
+              localStorage.setItem("access-token", data?.data?.token);
+              setLoading(false);
+            }
+          });
+      } else {
+        localStorage.removeItem("access-token");
+        setLoading(true);
+      }
     });
     return () => {
       return unSubscribe();

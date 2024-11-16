@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <div>
       <Helmet>
-        <title>Home</title>
+        <title>Gadget Shop | Home</title>
         <link rel="icon" type="image/svg+xml" href={userPic} />
       </Helmet>
       <Banner></Banner>

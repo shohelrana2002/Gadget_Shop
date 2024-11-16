@@ -3,6 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import useGetAuth from "../Hooks/useGetAuth";
 import { useForm } from "react-hook-form";
 import GoogleLogin from "../components/Home/Login_Register/GoogleLogin";
+import { Helmet } from "react-helmet-async";
+import Swal from "sweetalert2";
 
 const Register = () => {
   const { createAccount } = useGetAuth();
@@ -14,12 +16,31 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    createAccount(data.email, data.password);
-    console.log(data);
-    navigate("/");
+    createAccount(data.email, data.password)
+      .then((res) => {
+        console.log(res.user);
+        if (res.user.providerId) {
+          Swal.fire({
+            position: "top-right",
+            icon: "success",
+            title: "Regestion Success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+    // console.log(data);
+    // navigate("/");
   };
   return (
     <div>
+      <Helmet>
+        <title>Gadget Shop | Register</title>
+      </Helmet>
       <div>
         <div className="hero bg-base-200 min-h-screen">
           <div className="hero-content flex-col lg:flex-row-reverse">
@@ -99,6 +120,20 @@ const Register = () => {
                     </p>
                   )}
                   {/* {errors.confirmPassword && <p>Boot Password Must Be match</p>} */}
+                </div>
+                <div className="form-control">
+                  <label className="label">
+                    <span className="label-text">Role</span>
+                  </label>
+                  <select
+                    className="select select-bordered w-full max-w-xs
+                  "
+                    {...register("role", { required: true })}
+                  >
+                    <option value="buyer">Buyer</option>
+                    <option value="seller">Seller</option>
+                  </select>
+                  {errors.role && <p>Select On</p>}
                 </div>
                 <div className="form-control mt-6">
                   <button type="submit" className="btn btn-primary">

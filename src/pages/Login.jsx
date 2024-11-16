@@ -4,6 +4,7 @@ import useGetAuth from "../Hooks/useGetAuth";
 import { useForm } from "react-hook-form";
 import GoogleLogin from "../components/Home/Login_Register/GoogleLogin";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { userLogin } = useGetAuth();
@@ -35,6 +36,9 @@ const Login = () => {
   };
   return (
     <div>
+      <Helmet>
+        <title>Gadget Shop | Login</title>
+      </Helmet>
       <div className="hero bg-base-200 min-h-screen">
         <div className="hero-content flex-col lg:flex-row-reverse">
           <div className="text-center lg:text-left">
