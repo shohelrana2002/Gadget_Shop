@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import useGetAuth from "../Hooks/useGetAuth";
 import { useForm } from "react-hook-form";
 import GoogleLogin from "../components/Home/Login_Register/GoogleLogin";
+import Swal from "sweetalert2";
 
 const Login = () => {
   const { userLogin } = useGetAuth();
@@ -14,9 +15,23 @@ const Login = () => {
     formState: { errors },
   } = useForm();
   const handleLogin = (data) => {
-    console.log(data);
-    userLogin(data.email, data.password);
-    navigate("/");
+    userLogin(data.email, data.password)
+      .then((res) => {
+        console.log(res.user);
+        if (res.user.providerId) {
+          Swal.fire({
+            position: "top-right",
+            icon: "success",
+            title: "Success Your Login",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          navigate("/");
+        }
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
   return (
     <div>
@@ -52,14 +67,16 @@ const Login = () => {
                   type="password"
                   placeholder="password"
                   className="input input-bordered"
-                  {...register("password", { required: true })}
+                  {...register("password", { required: true, minLength: 6 })}
                 />
-                {errors.email && <p>Plz Enter A Corecct Password</p>}
-                <label className="label">
+                {errors.password && (
+                  <p className="text-red-500">Enter a Correct Password</p>
+                )}
+                {/* <label className="label">
                   <a href="#" className="label-text-alt link link-hover">
                     Forgot password?
                   </a>
-                </label>
+                </label> */}
               </div>
               <div className="form-control mt-6">
                 <button type="submit" className="btn btn-primary">

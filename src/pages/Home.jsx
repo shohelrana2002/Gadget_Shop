@@ -3,10 +3,15 @@ import Banner from "../components/Home/Banner";
 import FeaturedProducts from "../components/Home/FeaturedProducts";
 import UserReview from "../components/Home/UserReview";
 import Accordion from "../components/Home/Accordion";
-
+import { Helmet } from "react-helmet-async";
+import userPic from "../../public/user.png";
 const Home = () => {
   return (
     <div>
+      <Helmet>
+        <title>Home</title>
+        <link rel="icon" type="image/svg+xml" href={userPic} />
+      </Helmet>
       <Banner></Banner>
       <div className="mx-auto container">
         <div className="my-8">
