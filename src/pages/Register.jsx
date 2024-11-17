@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import GoogleLogin from "../components/Home/Login_Register/GoogleLogin";
 import { Helmet } from "react-helmet-async";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 const Register = () => {
   const { createAccount } = useGetAuth();
@@ -16,25 +17,37 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
+    const email = data.email;
+    const role = data.role;
+    const status = role === "buyer" ? "approved" : "pending";
+    const wishlist = [];
+    const userData = { email, role, status, wishlist };
+    // console.log(userData);
     createAccount(data.email, data.password)
-      .then((res) => {
-        console.log(res.user);
-        if (res.user.providerId) {
-          Swal.fire({
-            position: "top-right",
-            icon: "success",
-            title: "Regestion Success",
-            showConfirmButton: false,
-            timer: 1500,
-          });
-          navigate("/");
-        }
+      .then(() => {
+        axios.post("http://localhost:3000/users", userData).then((data) => {
+          if (data.data.insertedId) {
+            Swal.fire({
+              position: "top-right",
+              icon: "success",
+              title: "Regestion Success",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate("/");
+            form.reset();
+          }
+        });
       })
-      .catch((error) => {
-        console.log(error.message);
+      .catch((data) => {
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: `${data.message}`,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       });
-    // console.log(data);
-    // navigate("/");
   };
   return (
     <div>

@@ -5,7 +5,7 @@ export default {
   theme: {
     extend: {
       minHeight: {
-        "screen-minus-240": "calc(100vh - 180px)",
+        "screen-minus-240": "calc(100vh - 178px)",
       },
     },
   },
