@@ -1,6 +1,6 @@
 import React from "react";
 import useGetAuth from "../../Hooks/useGetAuth";
-import userPic from "../../../public/user.png";
+import userPic from "/user.png";
 import { Link } from "react-router-dom";
 const UserDropDown = () => {
   const { user, userLogout } = useGetAuth();
