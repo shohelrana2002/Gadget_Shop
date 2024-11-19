@@ -6,6 +6,10 @@ import FilterBar from "../components/Products/FilterBar";
 import axios from "axios";
 import Loading from "./Loading";
 import ProductsCards from "../components/ProductsCards";
+import {
+  FaRegArrowAltCircleLeft,
+  FaRegArrowAltCircleRight,
+} from "react-icons/fa";
 
 const Products = () => {
   const [products, setProduct] = useState([]);
@@ -17,24 +21,27 @@ const Products = () => {
   const [category, setCategory] = useState("");
   const [uniqBrand, setUniqBrand] = useState([]);
   const [uniqCategory, setUniqCategory] = useState([]);
-  console.log(brand, category);
+  // pagenation
+  const [page, setPage] = useState(1);
+  const [totalPage, setTotalPage] = useState(1);
   useEffect(() => {
     setLoading(true);
     const fetch = async () => {
       await axios
         .get(
-          `http://localhost:3000/all-products?title=${search}&sort=${sort}&brand=${brand}&category=${category}`
+          `http://localhost:3000/all-products?title=${search}&page=${page}&limit=${9}&sort=${sort}&brand=${brand}&category=${category}`
         )
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           setProduct(res.data.products);
           setUniqBrand(res.data.brands);
           setUniqCategory(res.data.categories);
+          setTotalPage(Math.ceil(res.data.totalProducts / 9));
           setLoading(false);
         });
     };
     fetch();
-  }, [search, sort, brand, category]);
+  }, [search, sort, brand, category, page]);
   const handleSearch = (e) => {
     e.preventDefault();
     setSearch(e.target.search.value);
@@ -47,6 +54,21 @@ const Products = () => {
     setCategory("");
     window.location.reload();
   };
+  const handlePageChange = (direction) => {
+    const newPage = page + direction; // Calculate the new page based on the direction
+    if (newPage > 0 && newPage <= totalPage) {
+      setPage(newPage);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
+
+  // const handlePageChange = (newPage) => {
+  //   if (newPage > 0 && newPage <= totalPage) {
+  //     setPage(newPage);
+  //     console.log(newPage);
+  //     window.scrollTo({ top: 0, behavior: "smooth" });
+  //   }
+  // };
   return (
     <div className="px-5">
       <Helmet>
@@ -90,6 +112,37 @@ const Products = () => {
               )}
             </>
           )}
+          {/* pagenation */}
+          {/* <div>
+            <button onClick={() => handlePageChange(-1)}>
+              <FaRegArrowAltCircleLeft></FaRegArrowAltCircleLeft>
+            </button>
+            <p>
+              Page {page} of {totalPage}
+            </p>
+            <button onClick={() => handlePageChange(1)}>
+              <FaRegArrowAltCircleRight></FaRegArrowAltCircleRight>
+            </button> 
+          </div>*/}
+          <div className="flex mx-auto justify-center items-center gap-4 my-8">
+            <button
+              className="btn btn-sm btn-primary"
+              disabled={page === 1}
+              onClick={() => handlePageChange(-1)}
+            >
+              <FaRegArrowAltCircleLeft size={24}></FaRegArrowAltCircleLeft>
+            </button>
+            <p>
+              Page{page}of{totalPage}
+            </p>
+            <button
+              className="btn btn-sm btn-primary"
+              disabled={page === totalPage}
+              onClick={() => handlePageChange(+1)}
+            >
+              <FaRegArrowAltCircleRight size={24}></FaRegArrowAltCircleRight>
+            </button>
+          </div>
         </div>
       </div>
     </div>
