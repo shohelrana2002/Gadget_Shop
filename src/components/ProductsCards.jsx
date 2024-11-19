@@ -1,24 +1,47 @@
 import React from "react";
-
-const ProductsCards = () => {
+import errorImg from "/error.jpg";
+const ProductsCards = ({ product }) => {
+  // const { imageURL, title, brand, price, stock, category, description } =
+  // product;
   return (
     <div>
       <div>
-        <div className="card bg-base-100 w-full md:w-96 shadow-xl">
-          <figure>
-            <img
-              src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-              alt="Shoes"
-            />
-          </figure>
-          <div className="card-body">
-            <h2 className="card-title">Shoes!</h2>
-            <p>If a dog chews shoes whose shoes does he choose?</p>
-            <div className="card-actions justify-end">
-              <button className="btn btn-primary">Buy Now</button>
+        <div className=" bg-base-100 h-full p-5  border-2 rounded-xl w-full shadow-xl">
+          <div className="flex justify-center items-center">
+            <div>
+              <figure>
+                <img
+                  src={product?.imageURL || errorImg}
+                  className="rounded-t-md h-60 w-full object-cover"
+                  alt={product?.imageURL || errorImg}
+                />
+              </figure>
             </div>
           </div>
-        </div>{" "}
+          <div className=" w-full">
+            <p className="text-xl  text-secondary font-semibold">
+              <p>Price: {product?.price}</p>
+            </p>
+            <p className="text-xl text-secondary font-semibold"></p>
+            <p>
+              {product?.title?.length < 50
+                ? `${product?.title}`
+                : `${product?.title?.slice(0, 30)}...`}
+            </p>
+            <p>
+              {product?.description?.length < 20
+                ? `${product?.description}`
+                : `${product?.description?.slice(0, 30)}...`}
+            </p>
+            <p>{`Stock :${product?.stock}`}</p>
+
+            <div className="justify-end">
+              <button className="btn btn-secondary btn-outline">
+                Add Whitelist
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

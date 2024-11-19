@@ -7,7 +7,6 @@ import useUserData from "../../Hooks/useUserData";
 const SellerRoutes = ({ children }) => {
   const { user, loading } = useGetAuth();
   const userData = useUserData();
-  console.log(userData.role);
   const location = useLocation();
   if (loading || !userData?.role) {
     return <Loading></Loading>;

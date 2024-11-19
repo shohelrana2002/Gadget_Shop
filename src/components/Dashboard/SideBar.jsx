@@ -22,7 +22,7 @@ const SideBar = () => {
   const userData = useUserData();
   const { userLogout } = useGetAuth();
   return (
-    <div className="bg-slate-200 min-h-screen border-r  px-8 py-16 border-black">
+    <div className="bg-slate-200  min-h-screen border-r  px-8 py-16 border-black">
       <h3 className="text-3xl font-semibold mb-8">Gadget Shop</h3>
       <ul className="flex flex-col gap-2 ">
         <li className="p-2 border border-green-600 rounded-md hover:shadow-md">
