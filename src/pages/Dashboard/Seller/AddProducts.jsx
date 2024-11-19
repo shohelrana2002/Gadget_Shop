@@ -93,6 +93,7 @@ const AddProducts = () => {
                   <span className="label-text">Product Price</span>
                 </label>
                 <input
+                  min={1}
                   inputmode="decimal"
                   pattern="[0-9]*[.,]?[0-9]*"
                   type="text"
@@ -107,6 +108,7 @@ const AddProducts = () => {
                   <span className="label-text">Product Stock</span>
                 </label>
                 <input
+                  min={1}
                   type="number"
                   placeholder="Product Stock"
                   className="input w-full input-bordered"

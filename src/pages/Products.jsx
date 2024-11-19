@@ -10,16 +10,43 @@ import ProductsCards from "../components/ProductsCards";
 const Products = () => {
   const [products, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
+  // search option dhwon to start
+  const [search, setSearch] = useState("");
+  const [sort, setSort] = useState("asc");
+  const [brand, setBrand] = useState("");
+  const [category, setCategory] = useState("");
+  const [uniqBrand, setUniqBrand] = useState([]);
+  const [uniqCategory, setUniqCategory] = useState([]);
+  console.log(brand, category);
   useEffect(() => {
     setLoading(true);
     const fetch = async () => {
-      await axios.get(`http://localhost:3000/all-products`).then((res) => {
-        setProduct(res.data);
-        setLoading(false);
-      });
+      await axios
+        .get(
+          `http://localhost:3000/all-products?title=${search}&sort=${sort}&brand=${brand}&category=${category}`
+        )
+        .then((res) => {
+          console.log(res.data);
+          setProduct(res.data.products);
+          setUniqBrand(res.data.brands);
+          setUniqCategory(res.data.categories);
+          setLoading(false);
+        });
     };
     fetch();
-  }, []);
+  }, [search, sort, brand, category]);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearch(e.target.search.value);
+    e.target.search.value = "";
+  };
+  const handleReset = () => {
+    setSearch("");
+    setSort("");
+    setBrand("");
+    setCategory("");
+    window.location.reload();
+  };
   return (
     <div className="px-5">
       <Helmet>
@@ -27,13 +54,19 @@ const Products = () => {
       </Helmet>
       <h4 className="text-2xl font-bold  text-center mt-6">All Products</h4>
       <div className="flex justify-between text-2xl font-semibold">
-        <SearchBar></SearchBar>
-        <SortByPrice></SortByPrice>
+        <SearchBar handleSearch={handleSearch}></SearchBar>
+        <SortByPrice setSort={setSort}></SortByPrice>
       </div>
       {/* // content */}
       <div className="grid md:grid-cols-12 grid-rows-1  mt-5">
         <div className="col-span-12 mb-4 md:mb-0 md:col-span-2">
-          <FilterBar></FilterBar>
+          <FilterBar
+            setBrand={setBrand}
+            setCategory={setCategory}
+            handleReset={handleReset}
+            uniqBrand={uniqBrand}
+            uniqCategory={uniqCategory}
+          ></FilterBar>
         </div>
         {/*  product  */}
         <div className="col-span-10 mx-6">

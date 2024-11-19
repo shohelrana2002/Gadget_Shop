@@ -2,7 +2,13 @@ import React from "react";
 import { GrPowerReset } from "react-icons/gr";
 import { TbFilter } from "react-icons/tb";
 
-const FilterBar = () => {
+const FilterBar = ({
+  setBrand,
+  setCategory,
+  handleReset,
+  uniqBrand,
+  uniqCategory,
+}) => {
   return (
     <div className=" md:min-h-screen  rounded-t-2xl bg-gray-200 h-full p-4">
       <div className="flex justify-center items-center gap-1 ">
@@ -11,24 +17,39 @@ const FilterBar = () => {
       </div>
       <div className="flex flex-col gap-3 mt-4 items-center max-w-full w-full">
         <div className="w-full">
-          <select className="select select-bordered w-full">
+          <select
+            onChange={(e) => setBrand(e.target.value)}
+            className="select select-bordered w-full"
+          >
             <option disabled selected>
               Brand
             </option>
-            <option value="asc">Low To High</option>
-            <option value="desc">High To Low</option>
+            {uniqBrand.map((brand) => (
+              <option value={brand} key={brand.index}>
+                {brand}
+              </option>
+            ))}
           </select>
         </div>
         <div className="w-full">
-          <select className="select select-bordered w-full max-w-full">
+          <select
+            onChange={(e) => setCategory(e.target.value)}
+            className="select select-bordered w-full max-w-full"
+          >
             <option disabled selected>
               Category
             </option>
-            <option value="asc">Low To High</option>
-            <option value="desc">High To Low</option>
+            {uniqCategory.map((category) => (
+              <option value={category} key={category.i}>
+                {category}
+              </option>
+            ))}
           </select>
         </div>
-        <button className="btn btn-outline btn-secondary w-full">
+        <button
+          onClick={handleReset}
+          className="btn btn-outline btn-secondary w-full"
+        >
           <span className="text-xl font-semibold ">Reset</span>{" "}
           <GrPowerReset size={20} />
         </button>
