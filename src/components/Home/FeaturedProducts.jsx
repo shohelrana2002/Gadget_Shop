@@ -7,11 +7,6 @@ const FeaturedProducts = () => {
       <ProductsCards></ProductsCards>
       <ProductsCards></ProductsCards>
       <ProductsCards></ProductsCards>
-      <ProductsCards></ProductsCards>
-      <ProductsCards></ProductsCards>
-      <ProductsCards></ProductsCards>
-      <ProductsCards></ProductsCards>
-      <ProductsCards></ProductsCards>
     </div>
   );
 };
