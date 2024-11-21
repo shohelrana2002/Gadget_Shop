@@ -1,8 +1,41 @@
 import React from "react";
 import errorImg from "/error.jpg";
+import useUserData from "../Hooks/useUserData";
+import axios from "axios";
+import Swal from "sweetalert2";
 const ProductsCards = ({ product }) => {
-  // const { imageURL, title, brand, price, stock, category, description } =
-  // product;
+  const userData = useUserData();
+  const userEmail = userData.email;
+  const handleWishlist = async () => {
+    await axios
+      .patch(`http://localhost:3000/wishlist/add`, {
+        userEmail: userEmail,
+        productId: product._id,
+      })
+      .then((res) => {
+        if (res.data.modifiedCount === 1) {
+          Swal.fire({
+            position: "top-right",
+            icon: "success",
+            title: "Add To Wishlist",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        } else {
+          Swal.fire({
+            position: "top-right",
+            icon: "warning",
+            title: "Already Add To Wishlist",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+        // console.log(res.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
   return (
     <div>
       <div>
@@ -36,7 +69,10 @@ const ProductsCards = ({ product }) => {
             <p>{`Stock :${product?.stock}`}</p>
 
             <div className="justify-end">
-              <button className="btn btn-secondary btn-outline">
+              <button
+                onClick={handleWishlist}
+                className="btn btn-secondary btn-outline"
+              >
                 Add Whitelist
               </button>
             </div>

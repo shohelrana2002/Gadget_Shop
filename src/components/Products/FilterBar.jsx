@@ -24,8 +24,8 @@ const FilterBar = ({
             <option disabled selected>
               Brand
             </option>
-            {uniqBrand.map((brand) => (
-              <option value={brand} key={brand.index}>
+            {uniqBrand.map((brand, i) => (
+              <option key={i} value={brand}>
                 {brand}
               </option>
             ))}
@@ -39,8 +39,8 @@ const FilterBar = ({
             <option disabled selected>
               Category
             </option>
-            {uniqCategory.map((category) => (
-              <option value={category} key={category.i}>
+            {uniqCategory.map((category, i) => (
+              <option value={category} key={i}>
                 {category}
               </option>
             ))}

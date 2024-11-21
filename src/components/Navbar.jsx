@@ -86,6 +86,7 @@ const Navbar = () => {
             </li>
           </ul>
         </div>
+
         {user ? (
           <div className="navbar-end">
             <UserDropDown></UserDropDown>
