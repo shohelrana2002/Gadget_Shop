@@ -18,6 +18,7 @@ const MainLayout = () => {
         <Outlet></Outlet>
         <Outlet></Outlet>
         <Outlet></Outlet>
+        <Outlet></Outlet>
       </div>
       <Footer></Footer>
     </div>
