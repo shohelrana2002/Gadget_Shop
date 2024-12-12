@@ -30,6 +30,7 @@ const MainLayout = () => {
       <Footer>jhj</Footer>
       <Footer>jhj</Footer>
       <Footer>jhj</Footer>
+      <Footer>jhj</Footer>
     </div>
   );
 };
