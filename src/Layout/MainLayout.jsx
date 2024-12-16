@@ -47,13 +47,6 @@ const MainLayout = () => {
       <Footer>1</Footer>
       <Footer>1</Footer>
       <Footer>1</Footer>
-      <Footer>1</Footer>s<Footer>1</Footer>
-      <Footer>1</Footer>
-      <Footer>1</Footer>
-      <Footer>1</Footer>
-      <Footer>1</Footer>
-      <Footer>1</Footer>
-      <Footer>1</Footer>
     </div>
   );
 };
