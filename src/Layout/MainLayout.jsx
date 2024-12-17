@@ -7,6 +7,7 @@ const MainLayout = () => {
     <div>
       <Navbar></Navbar>
       <Navbar></Navbar>
+      <Navbar></Navbar>
       <div className="min-h-screen-minus-240 pt-16">
         <Outlet></Outlet>
       </div>
