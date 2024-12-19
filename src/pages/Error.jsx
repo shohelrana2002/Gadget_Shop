@@ -7,9 +7,9 @@ const Error = () => {
         Page Not Found <span className="text-5xl text-gray-900">404</span>
       </h3>
 
-      <p className="text-2xl">
-        Back To Home Page ?{" "}
-        <Link className="btn btn-outline btn-primary">Home </Link>
+      <p className="text-2xl my-4 ">
+        Back To Home Page ?
+        <Link className="btn btn-sm btn-outline mx-4 btn-primary">Home </Link>
       </p>
     </div>
   );
