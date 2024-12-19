@@ -12,11 +12,13 @@ import Overview from "../pages/Dashboard/Overview";
 import SellerRoutes from "./Private/SellerRoutes";
 import MyProducts from "../pages/Dashboard/Seller/MyProducts";
 import AddProducts from "../pages/Dashboard/Seller/AddProducts";
+import Error from "../pages/Error";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement: <Error></Error>,
     children: [
       {
         path: "/",
