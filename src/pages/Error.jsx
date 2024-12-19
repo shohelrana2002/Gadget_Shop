@@ -2,11 +2,12 @@ import { Link } from "react-router-dom";
 
 const Error = () => {
   return (
-    <div className="min-h-screen items-center flex justify-center text-center">
+    <div className="min-h-screen items-center flex flex-col justify-center text-center">
       <h3 className="text-4xl text-rose-700">
         Page Not Found <span className="text-5xl text-gray-900">404</span>
       </h3>
-      <p>
+
+      <p className="text-2xl">
         Back To Home Page ? <Link>Hone </Link>
       </p>
     </div>
