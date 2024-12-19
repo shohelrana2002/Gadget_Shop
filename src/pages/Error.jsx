@@ -8,7 +8,8 @@ const Error = () => {
       </h3>
 
       <p className="text-2xl">
-        Back To Home Page ? <Link>Hone </Link>
+        Back To Home Page ?{" "}
+        <Link className="btn btn-outline btn-primary">Home </Link>
       </p>
     </div>
   );
