@@ -9,7 +9,9 @@ const Error = () => {
 
       <p className="text-2xl my-4 ">
         Back To Home Page ?
-        <Link className="btn btn-sm btn-outline mx-4 btn-primary">Home </Link>
+        <Link to={"/"} className="btn btn-sm btn-outline mx-4 btn-primary">
+          Home
+        </Link>
       </p>
     </div>
   );

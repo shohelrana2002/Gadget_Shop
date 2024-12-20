@@ -1,4 +1,3 @@
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useGetAuth from "../Hooks/useGetAuth";
 import { useForm } from "react-hook-form";

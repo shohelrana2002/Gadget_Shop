@@ -1,5 +1,6 @@
-import React, { createContext, useEffect, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import app from "../Firebase/Firebase";
+import PropTypes from "prop-types";
 import {
   createUserWithEmailAndPassword,
   getAuth,
@@ -81,6 +82,9 @@ const AuthProvider = ({ children }) => {
   return (
     <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
   );
+};
+AuthProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };
 
 export default AuthProvider;

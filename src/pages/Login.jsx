@@ -1,4 +1,3 @@
-import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useGetAuth from "../Hooks/useGetAuth";
 import { useForm } from "react-hook-form";
@@ -12,7 +11,6 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-
     formState: { errors },
   } = useForm();
   const handleLogin = (data) => {
@@ -61,7 +59,7 @@ const Login = () => {
                   className="input input-bordered"
                   {...register("email", { required: true })}
                 />
-                {errors.email && <p>Plz Enter A Corecct Email</p>}
+                {errors.email && <p>Plz Enter A Correct Email</p>}
               </div>
               <div className="form-control">
                 <label className="label">
