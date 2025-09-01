@@ -11,5 +11,6 @@
 .React Hooks Form <br>
 .Axios <br>
 .Fierbase <br>
+- tanStcak query 
 .React Loader Spinner <br>
 
